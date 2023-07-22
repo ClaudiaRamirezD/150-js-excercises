@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Date today</title>
+    <link rel="icon" href="https://fav.farm/⏰" />
+</head>
+
+<body>
+
+
+    <div class="clock">
+        <div>
+            <p class="day">Today is: </p>
+        </div>
+        <div>
+            <p class="time">Current time is : </p>
+        </div>
+    </div>
+
+
+    <style>
+        html {
+            background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
+            background-size: cover;
+            font-family: 'helvetica neue';
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        body {
+            margin: 0;
+            font-size: 1.3rem;
+            display: flex;
+            flex: 1;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+
+
+
+    <script>
+        const time = document.querySelector('.time');
+        const day = document.querySelector('.day');
+        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        function showDate() {
+            const now = new Date();
+            let dayName = weekday[now.getDay()];
+            day.innerHTML = `Today is: ${dayName}`;
+
+            const hour = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            // Determine AM or PM
+            const amOrPm = hour >= 12 ? "PM" : "AM";
+            const hour12Format = hour % 12 || 12; // Convert to 12-hour format
+
+            // Pad single-digit minutes and seconds with leading zero
+            const paddedMinutes = String(minutes).padStart(2, "0");
+            const paddedSeconds = String(seconds).padStart(2, "0");
+
+            time.innerHTML = `Current time is: ${hour12Format}:${paddedMinutes}:${paddedSeconds} ${amOrPm}`;
+        }
+
+        setInterval(showDate, 1000);
+        showDate();
+    </script>
+</body>
+
+</html>
